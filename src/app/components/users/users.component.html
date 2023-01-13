@@ -1,0 +1,134 @@
+<div class="container" style="margin-top: 30px">
+    <div class="card" style="width: 100%;">
+
+
+        <div>
+            <h1>Usuarios</h1>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#exampleModalcrear">Crear</button>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of users">
+                            <th scope="row">{{item.id}}</th>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.apellido}}</td>
+                            <td>{{item.telefono}}</td>
+                            <td>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModaleditar" (click)="selectUser(item)">Actualizar</button>
+                                <button sttle="margin-left: 5px;" type="button" class="btn btn-danger"
+                                    data-bs-toggle="modal" data-bs-target="#exampleModaleliminar"
+                                    (click)="selectUser(item)">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Crear-->
+<div class="modal fade" id="exampleModalcrear" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Crear</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="refreshModal()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="usersForm">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" placeholder="Pepito" formControlName="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" placeholder="Perez" formControlName="apellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" placeholder="32045789789" formControlName="telefono">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="refreshModal()">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="saveUser()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Editar-->
+<div class="modal fade" id="exampleModaleditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="usersForm">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" placeholder="Pepito" formControlName="nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" placeholder="Perez" formControlName="apellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Telefono</label>
+                        <input type="text" class="form-control" placeholder="32045789789" formControlName="telefono">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="refreshModal()">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="updateUser()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Eliminar-->
+<div class="modal fade" id="exampleModaleliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="refreshModal()"></button>
+            </div>
+            <div class="modal-body">
+                <h3>¿Estas seguro que deseas eliminar a {{user.nombre}}?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="refreshModal()">Cerrar</button>
+                <button type="button" class="btn btn-primary" (click)="deleteUser()">eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
