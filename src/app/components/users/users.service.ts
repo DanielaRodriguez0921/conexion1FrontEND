@@ -6,12 +6,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UsersService {
 
-  public url = '';
+  public url = 'http://localhost:4000/api/usuarios';
   constructor(private http: HttpClient) { }
 
 
   getUsers() {
-    return this.http.get(this.url);
+    return this.http.get(this.url + '/');
   }
 
   saveUsers(user: any) {
@@ -19,10 +19,10 @@ export class UsersService {
   }
 
   updateUser(user: any) {
-    return this.http.put(this.url + '/actualizar', user);
+    return this.http.post(this.url + '/actualizar', user);
   }
 
-  deleteUser(id: any) {
-    return this.http.delete(this.url + '/eliminar/' + id);
+  deleteUser(data: any) {
+    return this.http.post(this.url + '/eliminar', data);
   }
 }

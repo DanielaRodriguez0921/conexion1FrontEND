@@ -15,26 +15,7 @@ export class UsersComponent implements OnInit {
   }
 
   user: any = {};
-  public users = [
-    {
-      id: 1,
-      nombre: 'daniel',
-      apellido: 'rodriguez',
-      telefono: '324578'
-    },
-    {
-      id: 1,
-      nombre: 'Agustin',
-      apellido: 'rodriguez',
-      telefono: '324578'
-    },
-    {
-      id: 1,
-      nombre: 'daniel',
-      apellido: 'rodriguez',
-      telefono: '324578'
-    }
-  ];
+  public users: any = [];
   isUpdate: boolean = false;
 
   ngOnInit(): void {
@@ -51,7 +32,7 @@ export class UsersComponent implements OnInit {
   }
 
   listUser() {
-    this.userservice.getUsers().subscribe((res: any) => { console.log(res); this.users = res; });
+    this.userservice.getUsers().subscribe((res: any) => { console.log(res); this.users = res.users; });
   }
 
   saveUser() {
@@ -67,12 +48,17 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser() {
-    this.userservice.deleteUser(this.user.id).subscribe(res => { console.log(res); this.listUser() });
+    const data = {
+      id: this.user._id,
+      nombre: this.user.nombre
+    }
+    this.userservice.deleteUser(data).subscribe(res => { console.log(res); this.listUser() });
   }
 
   selectUser(user: any) {
     this.user = null;
     this.user = user;
+    console.log(this.user);
     this.usersForm.patchValue(
       {
         nombre: this.user.nombre,
@@ -101,7 +87,7 @@ export class UsersComponent implements OnInit {
       return data;
     } else {
       const data = {
-        id: this.user.id,
+        id: this.user._id,
         nombre: this.usersForm.value.nombre,
         apellido: this.usersForm.value.apellido,
         telefono: this.usersForm.value.telefono

@@ -22,10 +22,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of users">
-                            <th scope="row">{{item.id}}</th>
-                            <td>{{item.nombre}}</td>
-                            <td>{{item.apellido}}</td>
-                            <td>{{item.telefono}}</td>
+                            <th scope="row">{{item?.id}}</th>
+                            <td>{{item?.nombre}}</td>
+                            <td>{{item?.apellido}}</td>
+                            <td>{{item?.telefono}}</td>
                             <td>
                                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#exampleModaleditar" (click)="selectUser(item)">Actualizar</button>
@@ -71,7 +71,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                     (click)="refreshModal()">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="saveUser()">Guardar</button>
+                <button type="button" class="btn btn-primary" (click)="saveUser()" data-bs-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
@@ -105,7 +105,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                     (click)="refreshModal()">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="updateUser()">Actualizar</button>
+                <button type="button" class="btn btn-primary" (click)="updateUser()" data-bs-dismiss="modal">Actualizar</button>
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                     (click)="refreshModal()">Cerrar</button>
-                <button type="button" class="btn btn-primary" (click)="deleteUser()">eliminar</button>
+                <button type="button" class="btn btn-primary" (click)="deleteUser()" data-bs-dismiss="modal">eliminar</button>
             </div>
         </div>
     </div>
